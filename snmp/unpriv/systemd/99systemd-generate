@@ -2,4 +2,4 @@
 SHELL=/bin/bash
 PATH=/sbin:/bin:/usr/sbin:/usr/bin
 MAILTO=root
-*/5 * * * * /usr/bin/systemd.py > /var/lib/net-snmp/systemd
+*/5 * * * * root /usr/bin/systemd.py > /var/lib/net-snmp/systemd

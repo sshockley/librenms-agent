@@ -3,10 +3,8 @@
 ## Installation
 
 1. Copy systemd.py into /usr/bin/
-2. Copy timer and service unit into /etc/systemd/system/
-3. Fix selinux label with `restorecon -vF /etc/systemd/system/librenms-systemd-generate.*`
-3. Reload systemd configuration with `systemctl daemon-reload`
-4. Create file with `touch /var/lib/net-snmp/systemd.txt`
-5. Set selinux whatever with `restorecon -Rv /var/lib/net-snmp`
-4. Activate timer (`systemctl enable --now librenms-systemd-generate.timer`)
-5. Set `extend osupdate /usr/bin/cat /var/lib/net-snmp/systemd.txt` in `/etc/snmp/snmpd.conf`
+2. Copy 99systemd-generate to /etc/cron.d
+3. Fix selinux label with `restorecon -vF /etc/cron.d/99systemd-generate`
+4. Create file with `touch /var/lib/net-snmp/systemd`
+5. Set selinux whatever with `restorecon -Fv /var/lib/net-snmp/systemd`
+6. Set `extend osupdate /usr/bin/cat /var/lib/net-snmp/systemd` in `/etc/snmp/snmpd.conf`
