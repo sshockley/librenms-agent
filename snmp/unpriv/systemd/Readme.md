@@ -2,7 +2,7 @@
 
 ## Installation
 
-1. Copy systemd.py into /usr/bin/
+1. Copy systemd.py into /usr/local/lib/snmpd/
 2. Copy 99systemd-generate to /etc/cron.d
 3. Fix selinux label with `restorecon -vF /etc/cron.d/99systemd-generate`
 4. Create file with `touch /var/lib/net-snmp/systemd`
