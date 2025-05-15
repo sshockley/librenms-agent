@@ -2,4 +2,4 @@
 SHELL=/bin/bash
 PATH=/sbin:/bin:/usr/sbin:/usr/bin
 MAILTO=root
-*/5 * * * * root /usr/local/lib/snmpd/osupdates > /var/lib/net-snmp/osupdates
+*/5 * * * * root /usr/local/lib/snmpd/osupdates-unpriv-gather.sh > /var/lib/net-snmp/osupdates
