@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 #
 # Name: Systemd Script
 # Author: bnerickson <bnerickson87@gmail.com> w/SourceDoctor's certificate.py script forming
