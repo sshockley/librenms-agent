@@ -29,7 +29,20 @@ BIN_PKG='/usr/sbin/pkg'
 CMD_PKG=' audit -q -F'
 BIN_APK='/sbin/apk'
 CMD_APK=' version'
-SNMP_PERSISTENT_DIR="/var/lib/net-snmp"
+
+if command -v net-snmp-config &>/dev/null ; then
+    SNMP_PERSISTENT_DIR="$(net-snmp-config --persistent-directory)"
+else
+    # Some distributions don't include net-snmp-config
+    if [ -d "/var/lib/net-snmp" ]; then
+        SNMP_PERSISTENT_DIR="/var/lib/net-snmp" # Fedora, EL
+    elif [ -d "/var/lib/snmp" ]; then
+        SNMP_PERSISTENT_DIR="/var/lib/snmp"     # Debian
+    elif [ -d "/var/db/net-snmp" ]; then
+        SNMP_PERSISTENT_DIR="/var/db/net-snmp"  # MacOS?
+    fi
+fi
+
 UNPRIV_SHARED_FILE="$SNMP_PERSISTENT_DIR/osupdates/stats.txt"
 
 mkdir -p "$(dirname "$UNPRIV_SHARED_FILE" )"
