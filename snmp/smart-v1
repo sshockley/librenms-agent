@@ -78,18 +78,18 @@ Switches:
 -S            Set useSN to 0 when using -g
 -t <test>     Run the specified smart self test on all the devices.
 -U            When calling cciss_vol_status, call it with -u.
--G <modes>    Guess modes to use. This is a comma seperated list.
+-G <modes>    Guess modes to use. This is a comma separated list.
               Default :: scan-open,cciss-vol-status
 
 Guess Modes:
 
-- scan :: Use "--scan" with smartctl. "scan-open" will take presidence.
+- scan :: Use "--scan" with smartctl. "scan-open" will take precedence.
 
 - scan-open :: Call smartctl with "--scan-open".
 
 - cciss-vol-status :: Freebsd/Linux specific and if it sees /dev/sg0(on Linux) or
     /dev/ciss0(on FreebSD) it will attempt to find drives via cciss-vol-status,
-    and then optionally checking for disks via smrtctl if -C is given. Should be noted
+    and then optionally checking for disks via smartctl if -C is given. Should be noted
     though that -C will not find drives that are currently missing/failed. If -U is given,
     cciss_vol_status will be called with -u.
 
@@ -126,19 +126,19 @@ sub main::HELP_MESSAGE {
 -S            Set useSN to 0 when using -g
 -t <test>     Run the specified smart self test on all the devices.
 -U            When calling cciss_vol_status, call it with -u.
--G <modes>    Guess modes to use. This is a comma seperated list.
+-G <modes>    Guess modes to use. This is a comma separated list.
               Default :: scan-open,cciss-vol-status
 
 
 Scan Modes:
 
-- scan :: Use "--scan" with smartctl. "scan-open" will take presidence.
+- scan :: Use "--scan" with smartctl. "scan-open" will take precedence.
 
 - scan-open :: Call smartctl with "--scan-open".
 
 - cciss-vol-status :: Freebsd/Linux specific and if it sees /dev/sg0(on Linux) or
     /dev/ciss0(on FreebSD) it will attempt to find drives via cciss-vol-status,
-    and then optionally checking for disks via smrtctl if -C is given. Should be noted
+    and then optionally checking for disks via smartctl if -C is given. Should be noted
     though that -C will not find drives that are currently missing/failed. If -U is given,
     cciss_vol_status will be called with -u.
 ';
@@ -284,13 +284,13 @@ if ( defined( $opts{g} ) ) {
 			$name =~ s/\/dev\///;
 
 			# only add it if not a virtual RAID drive
-			# HP RAID virtual disks will show up with very basical but totally useless smart data
+			# HP RAID virtual disks will show up with very basic but totally useless smart data
 			if ($not_virt) {
 				if ( $found_disks_names{$name} == 0 ) {
 					# If no other devices, just name it after the base device.
 					$drive_lines = $drive_lines . $name . " " . $arguments . "\n";
 				} else {
-					# if more than one, start at zero and increment, apennding comma number to the base device name
+					# if more than one, start at zero and increment, appending comma number to the base device name
 					if ( defined( $current_disk{$name} ) ) {
 						$current_disk{$name}++;
 					} else {
@@ -382,17 +382,17 @@ if ( defined( $opts{g} ) ) {
 			} else {
 				my $drive_count = 0;
 				# count the connector lines, this will make sure failed are founded as well
-				my $seen_conectors = {};
+				my $seen_connectors = {};
 				while ( $output =~ /(connector +\d+[IA]\ +box +\d+\ +bay +\d+.*)/g ) {
 					my $cciss_drive_line = $1;
 					my $connector        = $cciss_drive_line;
 					$connector =~ s/(.*\ bay +\d+).*/$1/;
 					if (   !defined( $seen_lines->{$cciss_drive_line} )
-						&& !defined( $seen_conectors->{$connector} )
+						&& !defined( $seen_connectors->{$connector} )
 						&& !defined( $ignore_lines->{$cciss_drive_line} ) )
 					{
 						$seen_lines->{$cciss_drive_line} = 1;
-						$seen_conectors->{$connector}    = 1;
+						$seen_connectors->{$connector}    = 1;
 						$drive_count++;
 					} else {
 						# going to be a connector we've already seen
@@ -498,15 +498,15 @@ while ( defined( $configA[$configA_int] ) ) {
 #
 if ( defined( $opts{t} ) ) {
 
-	# make sure we have something that atleast appears sane for the test name
-	my $valid_tesks = {
+	# make sure we have something that at least appears sane for the test name
+	my $valid_tests = {
 		'offline'        => 1,
 		'short'          => 1,
 		'long'           => 1,
 		'conveyance'     => 1,
 		'afterselect,on' => 1,
 	};
-	if ( !defined( $valid_tesks->{ $opts{t} } ) && $opts{t} !~ /select,(\d+[\-\+]\d+|next|next\+\d+|redo\+\d+)/ ) {
+	if ( !defined( $valid_tests->{ $opts{t} } ) && $opts{t} !~ /select,(\d+[\-\+]\d+|next|next\+\d+|redo\+\d+)/ ) {
 		print '"' . $opts{t} . "\" does not appear to be a valid test\n";
 		exit 1;
 	}
@@ -543,7 +543,7 @@ my $noWrite = 0;
 
 #
 #
-# if no -u, it means we are being called from snmped
+# if no -u, it means we are being called from snmpd
 #
 #
 if ( !defined( $opts{u} ) ) {
