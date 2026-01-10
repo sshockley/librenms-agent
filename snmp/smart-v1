@@ -105,7 +105,7 @@ use JSON;
 use MIME::Base64;
 use IO::Compress::Gzip qw(gzip $GzipError);
 
-my $cache    = '/var/lib/net-snmp/smart';
+my $cache    = '/var/cache/smart';
 my $smartctl = '/usr/bin/env smartctl';
 my @disks;
 my $useSN = 1;
