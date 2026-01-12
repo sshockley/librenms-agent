@@ -1,7 +1,7 @@
 #!/bin/bash
 
 SNMP_PERSISTENT_DIR="/var/lib/net-snmp"
-UNPRIV_SHARED_FILE="$SNMP_PERSISTENT_DIR/osupdates/stats.txt"
+UNPRIV_SHARED_FILE="$SNMP_PERSISTENT_DIR/osupdates.txt"
 
 if [ -f "$UNPRIV_SHARED_FILE" ]; then
     cat "$UNPRIV_SHARED_FILE"

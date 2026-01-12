@@ -43,7 +43,7 @@ else
     fi
 fi
 
-UNPRIV_SHARED_FILE="$SNMP_PERSISTENT_DIR/osupdates/stats.txt"
+UNPRIV_SHARED_FILE="$SNMP_PERSISTENT_DIR/osupdates.txt"
 
 mkdir -p "$(dirname "$UNPRIV_SHARED_FILE" )"
 exec > "$UNPRIV_SHARED_FILE"

@@ -31,7 +31,7 @@ BIN_APK='/sbin/apk'
 CMD_APK=' version'
 
 SNMP_PERSISTENT_DIR="$(net-snmp-config --persistent-directory)"
-UNPRIV_SHARED_FILE="$SNMP_PERSISTENT_DIR/osupdates/stats.txt"
+UNPRIV_SHARED_FILE="$SNMP_PERSISTENT_DIR/osupdates.txt"
 
 # Set to RW for PiKVM
 /usr/bin/rw
