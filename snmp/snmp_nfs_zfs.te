@@ -1,4 +1,4 @@
-module local_snmp 1.0;
+module snmp_nfs_zfs 1.0;
 
 require {
     type snmpd_t;
